@@ -1,0 +1,21 @@
+.gametracker-box .gametracker-item {
+    margin-bottom: 15px;
+}
+.gametracker-box .gametracker-item:last-child {
+    margin-bottom: 0;
+}
+.gametracker-box .h-slide .gametracker-item {
+    width: auto !important;
+    margin-right: 15px !important;
+    margin-bottom: 0;
+}
+.gametracker-box .gametrackersslider .bx-wrapper {
+    margin: 0;
+}
+.gametracker-box .gametrackersslider .bx-viewport {
+    left: 0;
+}
+.bx-wrapper {
+    border: 0 !important;
+    box-shadow: none !important;
+}
