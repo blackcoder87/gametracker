@@ -13,7 +13,7 @@ class Config extends \Ilch\Config\Install
         'version' => '1.0.0',
         'icon_small' => 'fa-regular fa-google',
         'author' => 'The_Mumie',
-        'link' => 'https://ilch.de',
+        'link' => '',
         'languages' => [
             'de_DE' => [
                 'name' => 'Gametracker',
