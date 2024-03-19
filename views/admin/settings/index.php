@@ -1,3 +1,7 @@
+<?php
+
+/** @var \Ilch\View $this */
+?>
 <link href="<?=$this->getModuleUrl('static/css/gametrackers.css') ?>" rel="stylesheet">
 
 <h1><?=$this->getTrans('settings') ?></h1>
@@ -30,7 +34,7 @@ if ($this->validation()->hasErrors()) {
                 <?=$this->getTrans('boxSliderMode') ?>:
             </label>
             <div class="col-lg-2">
-                <select class="form-control" name="boxSliderMode">
+                <select class="form-control" name="boxSliderMode" id="boxSliderMode">
                     <option <?=($this->get('boxSliderMode') === 'vertical') ? 'selected="selected"' : '' ?> value="vertical"><?=$this->getTrans('boxSliderModeVertical') ?></option>
                     <option <?=($this->get('boxSliderMode') === 'horizontal') ? 'selected="selected"' : '' ?> value="horizontal"><?=$this->getTrans('boxSliderModeHorizontal') ?></option>
                 </select>
@@ -69,7 +73,7 @@ if ($this->validation()->hasErrors()) {
 
 <script>
 $('[name="slider"]').click(function () {
-    if ($(this).val() == "1") {
+    if ($(this).val() === "1") {
         $('#contentHeight').removeClass('hidden');
     } else {
         $('#contentHeight').addClass('hidden');

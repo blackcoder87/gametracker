@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Ilch 2
  * @package ilch
@@ -58,7 +59,7 @@ class Config extends \Ilch\Config\Install
             DELETE FROM `[prefix]_config` WHERE `key` = 'gametrackers_slider_speed'");
     }
 
-    public function getInstallSql()
+    public function getInstallSql(): string
     {
         return 'CREATE TABLE IF NOT EXISTS `[prefix]_gametrackers` (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -70,14 +71,15 @@ class Config extends \Ilch\Config\Install
             `setfree` TINYINT(1) NOT NULL DEFAULT 0,
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1';
+    }
 
+    public function getUpdate(string $installedVersion): string
+    {
+        switch ($installedVersion) {
+            case '1.0.0':
+                // no break
         }
 
-	public function getUpdate($installedVersion)
-	{
-			
-        switch ($installedVersion) {
-
-            case '1.0':}
-		}
-  }
+        return '"' . $this->config['key'] . '" Update-function executed.';
+    }
+}

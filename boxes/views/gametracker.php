@@ -1,3 +1,10 @@
+<?php
+
+/** @var \Ilch\View $this */
+
+/** @var Modules\Gametracker\Models\Gametracker[] $gametrackers */
+$gametrackers = $this->get('gametrackers');
+?>
 <link href="<?=$this->getBaseUrl('application/modules/gametracker/static/css/gametrackers.css') ?>" rel="stylesheet">
 <link href="<?=$this->getBaseUrl('application/modules/gametracker/static/js/jquery.bxslider/jquery.bxslider.min.css') ?>" rel="stylesheet">
 <style>
@@ -7,8 +14,8 @@
 </style>
 
 <div class="gametracker-box">
-    <?php if ($this->get('slider') == 0): ?>
-        <?php foreach ($this->get('gametrackers') as $gametracker): ?>
+    <?php if ($this->get('slider') == 0) : ?>
+        <?php foreach ($gametrackers as $gametracker) : ?>
             <div class="gametracker-item">
                 <?php
                 $userMapper = new Modules\User\Mappers\User();
@@ -19,14 +26,14 @@
                     $banner = $gametracker->getBanner();
                 }
                 ?>
-                <a href="<?=$link ?>" target=<?=($gametracker->getTarget() == 0) ? '"_blank" rel="noopener"' : '"_self"' ?>><img src="<?=$banner ?>" title="<?=$this->escape($gametracker->getName()) ?>" border="0" alt="<?=$this->escape($gametracker->getName()) ?>"/></a>
+                <a href="<?=$link ?>" target=<?=($gametracker->getTarget() == 0) ? '"_blank" rel="noopener"' : '"_self"' ?>><img src="<?=$banner ?>" title="<?=$this->escape($gametracker->getName()) ?>" style="border: 0;" alt="<?=$this->escape($gametracker->getName()) ?>"/></a>
         <?php endforeach; ?>
-    <?php else: ?>
-        <?php if (!empty($this->get('gametrackers'))) : ?>
+    <?php else : ?>
+        <?php if (!empty($gametrackers)) : ?>
             <div class="gametrackersslider">
                 <div class="bxslider<?=($this->get('sliderMode') === 'horizontal' ? ' h-slide' : '') ?>">
                     <?php
-                    foreach ($this->get('gametrackers') as $gametracker):
+                    foreach ($this->get('gametrackers') as $gametracker) :
                         $userMapper = new Modules\User\Mappers\User();
                         $link = $userMapper->getHomepage($gametracker->getLink());
                         if (strncmp($gametracker->getBanner(), 'application', 11) === 0) {
@@ -37,7 +44,7 @@
                         ?>
 
                         <div class="gametracker-item">
-                            <a href="<?=$link ?>" target=<?=($gametracker->getTarget() == 0) ? '"_blank" rel="noopener"' : '"_self"' ?>><img src="<?=$banner ?>" title="<?=$this->escape($gametracker->getName()) ?>" border="0" alt="<?=$this->escape($gametracker->getName()) ?>"/></a>
+                            <a href="<?=$link ?>" target=<?=($gametracker->getTarget() == 0) ? '"_blank" rel="noopener"' : '"_self"' ?>><img src="<?=$banner ?>" title="<?=$this->escape($gametracker->getName()) ?>" style="border: 0;" alt="<?=$this->escape($gametracker->getName()) ?>"/></a>
                         </div>
                     <?php endforeach; ?>
                 </div>

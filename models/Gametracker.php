@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Ilch 2
  * @package ilch
@@ -13,49 +14,49 @@ class Gametracker extends \Ilch\Model
      *
      * @var int
      */
-    protected $id;
+    protected $id = 0;
 
     /**
      * The name of the gametracker.
      *
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * The link of the gametracker.
      *
      * @var string
      */
-    protected $link;
+    protected $link = '';
 
     /**
      * The banner of the gametracker.
      *
      * @var string
      */
-    protected $banner;
+    protected $banner = '';
 
     /**
      * The link target of the entry.
      *
-     * @var integer
+     * @var int
      */
-    protected $target;
+    protected $target = 0;
 
     /**
      * The free of the entry.
      *
      * @var integer
      */
-    protected $free;
+    protected $free = 0;
 
     /**
      * Gets the id of the gametracker.
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -66,9 +67,9 @@ class Gametracker extends \Ilch\Model
      * @param int $id
      * @return $this
      */
-    public function setId($id)
+    public function setId(int $id): Gametracker
     {
-        $this->id = (int)$id;
+        $this->id = $id;
 
         return $this;
     }
@@ -78,7 +79,7 @@ class Gametracker extends \Ilch\Model
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -89,9 +90,9 @@ class Gametracker extends \Ilch\Model
      * @param string $name
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name): Gametracker
     {
-        $this->name = (string)$name;
+        $this->name = $name;
 
         return $this;
     }
@@ -101,7 +102,7 @@ class Gametracker extends \Ilch\Model
      *
      * @return string
      */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
@@ -112,9 +113,9 @@ class Gametracker extends \Ilch\Model
      * @param string $link
      * @return $this
      */
-    public function setLink($link)
+    public function setLink(string $link): Gametracker
     {
-        $this->link = (string)$link;
+        $this->link = $link;
 
         return $this;
     }
@@ -124,7 +125,7 @@ class Gametracker extends \Ilch\Model
      *
      * @return string
      */
-    public function getBanner()
+    public function getBanner(): string
     {
         return $this->banner;
     }
@@ -135,9 +136,9 @@ class Gametracker extends \Ilch\Model
      * @param string $banner
      * @return $this
      */
-    public function setBanner($banner)
+    public function setBanner(string $banner): Gametracker
     {
-        $this->banner = (string)$banner;
+        $this->banner = $banner;
 
         return $this;
     }
@@ -145,9 +146,9 @@ class Gametracker extends \Ilch\Model
     /**
      * Gets the link target of the entry.
      *
-     * @return integer
+     * @return int
      */
-    public function getTarget()
+    public function getTarget(): int
     {
         return $this->target;
     }
@@ -155,12 +156,12 @@ class Gametracker extends \Ilch\Model
     /**
      * Set the link target of the entry.
      *
-     * @param integer $target
+     * @param int $target
      * @return $this
      */
-    public function setTarget($target)
+    public function setTarget(int $target): Gametracker
     {
-        $this->target = (int)$target;
+        $this->target = $target;
 
         return $this;
     }
@@ -168,9 +169,9 @@ class Gametracker extends \Ilch\Model
     /**
      * Gets the free of the entry.
      *
-     * @return integer
+     * @return int
      */
-    public function getFree()
+    public function getFree(): int
     {
         return $this->free;
     }
@@ -178,12 +179,12 @@ class Gametracker extends \Ilch\Model
     /**
      * Set the free of the entry.
      *
-     * @param integer $free
+     * @param int $free
      * @return $this
      */
-    public function setFree($free)
+    public function setFree(int $free): Gametracker
     {
-        $this->free = (int)$free;
+        $this->free = $free;
 
         return $this;
     }

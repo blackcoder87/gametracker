@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Ilch 2
  * @package ilch
@@ -146,22 +147,27 @@ class Index extends \Ilch\Controller\Admin
     {
         $gametrackerMapper = new GametrackerMapper();
 
+        $gametracker = new GametrackerModel();
         if ($this->getRequest()->getParam('id')) {
             $this->getLayout()->getAdminHmenu()
                 ->add($this->getTranslator()->trans('menuGametracker'), ['action' => 'index'])
                 ->add($this->getTranslator()->trans('edit'), ['action' => 'treat']);
 
-            $this->getView()->set('gametracker', $gametrackerMapper->getGametrackerById($this->getRequest()->getParam('id')));
+            $gametracker = $gametrackerMapper->getGametrackerById($this->getRequest()->getParam('id'));
+            if (!$gametracker) {
+                $this->redirect()->to(['action' => 'index']);
+            }
         } else {
             $this->getLayout()->getAdminHmenu()
                 ->add($this->getTranslator()->trans('menuGametracker'), ['action' => 'index'])
                 ->add($this->getTranslator()->trans('add'), ['action' => 'treat']);
         }
+        $this->getView()->set('gametracker', $gametracker);
 
         if ($this->getRequest()->isPost()) {
             $banner = trim($this->getRequest()->getPost('banner'));
             if (!empty($banner) && strncmp($banner, 'application', 11) === 0) {
-                $banner = BASE_URL.'/'.$banner;
+                $banner = BASE_URL . '/' . $banner;
             }
 
             $post = [
@@ -181,34 +187,24 @@ class Index extends \Ilch\Controller\Admin
             $post['banner'] = trim($this->getRequest()->getPost('banner'));
 
             if ($validation->isValid()) {
-                $model = new GametrackerModel();
-                if ($this->getRequest()->getParam('id')) {
-                    $model->setId($this->getRequest()->getParam('id'));
-                } else {
-                    $model->setFree(1);
+                if (!$this->getRequest()->getParam('id')) {
+                    $gametracker->setFree(1);
                 }
-                $model->setName($post['name'])
+                $gametracker->setName($post['name'])
                     ->setLink($post['link'])
                     ->setTarget($post['target'])
                     ->setBanner($post['banner']);
-                $gametrackerMapper->save($model);
+                $gametrackerMapper->save($gametracker);
 
                 $this->redirect()
                     ->withMessage('saveSuccess')
                     ->to(['action' => 'index']);
             } else {
                 $this->addMessage($validation->getErrorBag()->getErrorMessages(), 'danger', true);
-                if ($this->getRequest()->getParam('id')) {
-                    $this->redirect()
-                        ->withInput()
-                        ->withErrors($validation->getErrorBag())
-                        ->to(['action' => 'treat', 'id' => $this->getRequest()->getParam('id')]);
-                } else {
-                    $this->redirect()
-                        ->withInput()
-                        ->withErrors($validation->getErrorBag())
-                        ->to(['action' => 'treat']);
-                }
+                $this->redirect()
+                    ->withInput()
+                    ->withErrors($validation->getErrorBag())
+                    ->to(array_merge(['action' => 'treat'], ($this->getRequest()->getParam('id') ? ['id' => $this->getRequest()->getParam('id')] : [])));
             }
         }
     }
