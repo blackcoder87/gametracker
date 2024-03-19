@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Ilch 2
  * @package ilch
@@ -14,9 +15,9 @@ class Gametracker extends \Ilch\Mapper
      * Gets the Gametracker entries.
      *
      * @param array $where
-     * @return GametrackerModel[]|array
+     * @return GametrackerModel[]
      */
-    public function getEntries($where = [])
+    public function getEntries(array $where = []): array
     {
         return $this->getGametrackersBy($where, ['id' => 'DESC']);
     }
@@ -26,9 +27,9 @@ class Gametracker extends \Ilch\Mapper
      *
      * @param array $where
      * @param array $orderBy
-     * @return GametrackerModel[]|array
+     * @return GametrackerModel[]
      */
-    public function getGametrackersBy($where = [], $orderBy = ['id' => 'ASC'])
+    public function getGametrackersBy(array $where = [], array $orderBy = ['id' => 'ASC']): array
     {
         $gametrackerArray = $this->db()->select('*')
             ->from('gametrackers')
@@ -59,10 +60,10 @@ class Gametracker extends \Ilch\Mapper
     /**
      * Gets gametracker.
      *
-     * @param integer $id
+     * @param int $id
      * @return GametrackerModel|null
      */
-    public function getGametrackerById($id)
+    public function getGametrackerById(int $id): ?GametrackerModel
     {
         $gametrackerRow = $this->db()->select('*')
             ->from('gametrackers')
@@ -117,7 +118,7 @@ class Gametracker extends \Ilch\Mapper
      * @param int $id
      * @param int $position
      */
-    public function updatePositionById($id, $position)
+    public function updatePositionById(int $id, int $position)
     {
         $this->db()->update('gametrackers')
             ->values(['pos' => $position])
@@ -128,9 +129,9 @@ class Gametracker extends \Ilch\Mapper
     /**
      * Deletes gametracker with given id.
      *
-     * @param integer $id
+     * @param int $id
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         $this->db()->delete('gametrackers')
             ->where(['id' => $id])

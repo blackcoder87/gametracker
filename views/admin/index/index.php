@@ -1,10 +1,17 @@
+<?php
+
+/** @var \Ilch\View $this */
+
+/** @var Modules\Gametracker\Models\Gametracker[] $entries */
+$entries = $this->get('entries');
+?>
 <h1>
     <?=$this->getTrans('manage') ?>
     <a class="badge" data-toggle="modal" data-target="#infoModal">
         <i class="fa-solid fa-info"></i>
     </a>
 </h1>
-<?php if ($this->get('entries') != ''): ?>
+<?php if ($entries) : ?>
     <form class="form-horizontal" id="gametrackerIndexForm" method="POST">
         <?=$this->getTokenField() ?>
         <ul class="nav nav-tabs">
@@ -13,7 +20,7 @@
                     <?=$this->getTrans('entrys') ?>
                 </a>
             </li>
-            <?php if ($this->get('badge') > 0): ?>
+            <?php if ($this->get('badge') > 0) : ?>
                 <li <?=($this->getRequest()->getParam('showsetfree')) ? 'class="active"' : '' ?>>
                     <a href="<?=$this->getUrl(['controller' => 'index', 'action' => 'index', 'showsetfree' => 1]) ?>">
                         <?=$this->getTrans('setfree') ?> <span class="badge"><?=$this->get('badge') ?></span>
@@ -26,7 +33,7 @@
             <table class="table table-hover table-striped">
                 <colgroup>
                     <col class="icon_width">
-                    <?php  if ($this->getRequest()->getParam('showsetfree')): ?>
+                    <?php  if ($this->getRequest()->getParam('showsetfree')) : ?>
                         <col class="icon_width">
                     <?php endif; ?>
                     <col class="icon_width">
@@ -38,7 +45,7 @@
                     <tr>
                         <th><?=$this->getCheckAllCheckbox('check_entries') ?></th>
                         <th></th>
-                        <?php  if ($this->getRequest()->getParam('showsetfree')): ?>
+                        <?php  if ($this->getRequest()->getParam('showsetfree')) : ?>
                             <th></th>
                         <?php endif; ?>
                         <th></th>
@@ -47,22 +54,22 @@
                     </tr>
                 </thead>
                 <tbody id="sortable">
-                    <?php foreach ($this->get('entries') as $entry): ?>
-                        <?php if (strncmp($entry->getBanner(), 'application', 11) === 0): ?>
+                    <?php foreach ($entries as $entry) : ?>
+                        <?php if (strncmp($entry->getBanner(), 'application', 11) === 0) : ?>
                             <?php $banner = $this->getBaseUrl($entry->getBanner()); ?>
-                        <?php else: ?>
+                        <?php else : ?>
                             <?php $banner = $entry->getBanner(); ?>
                         <?php endif; ?>
                         <tr id="<?=$entry->getId() ?>">
                             <td><?=$this->getDeleteCheckbox('check_entries', $entry->getId()) ?></td>
-                            <?php if ($this->getRequest()->getParam('showsetfree')): ?>
+                            <?php if ($this->getRequest()->getParam('showsetfree')) : ?>
                                 <td>
                                     <?php
                                     $freeArray = ['action' => 'setfree', 'id' => $entry->getId()];
                                     if ($this->get('badge') > 1) {
                                         $freeArray = ['action' => 'setfree', 'id' => $entry->getId(), 'showsetfree' => 1];
                                     }
-                                    echo '<a href="'.$this->getUrl($freeArray, null, true).'" title="'.$this->getTrans('setfree').'"><i class="fa-solid fa-check-square-o text-success"></i></a>';
+                                    echo '<a href="' . $this->getUrl($freeArray, null, true) . '" title="' . $this->getTrans('setfree') . '"><i class="fa-solid fa-check-square-o text-success"></i></a>';
                                     ?>
                                 </td>
                             <?php endif; ?>
@@ -77,7 +84,7 @@
                                 ?>
                             </td>
                             <td><?=$this->escape($entry->getName()) ?></td>
-                            <td><a href='<?=$this->escape($entry->getLink()) ?>' target="_blank" rel="noopener"><img src='<?=$banner ?>'></a></td>
+                            <td><a href='<?=$this->escape($entry->getLink()) ?>' target="_blank" rel="noopener"><img alt="" src='<?=$banner ?>'></a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -117,11 +124,11 @@
         });
         $('#gametrackerIndexForm').submit (
             function () {
-                var items = $("#sortable tr");
-                var gametrackerIDs = [items.length];
-                var index = 0;
+                let items = $("#sortable tr");
+                let gametrackerIDs = [items.length];
+                let index = 0;
                 items.each(
-                    function(intIndex) {
+                    function() {
                         gametrackerIDs[index] = $(this).attr("id");
                         index++;
                     });
@@ -129,7 +136,7 @@
             }
         );
     </script>
-<?php else: ?>
+<?php else : ?>
     <?=$this->getTrans('noGametrackers') ?>
 <?php endif; ?>
 
