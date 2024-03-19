@@ -23,7 +23,7 @@
                    class="form-control"
                    id="link"
                    name="link"
-                   placeholder="http://"
+                   placeholder="https://"
                    value="<?=($this->get('gametracker') != '') ? $this->escape($this->get('gametracker')->getLink()) : $this->escape($this->originalInput('link')) ?>" />
         </div>
         <div class="col-lg-3">

@@ -59,7 +59,7 @@ class Gametracker extends \Ilch\Mapper
     /**
      * Gets gametracker.
      *
-     * @param integer $id
+     * @param int $id
      * @return GametrackerModel|null
      */
     public function getGametrackerById($id)
@@ -128,7 +128,7 @@ class Gametracker extends \Ilch\Mapper
     /**
      * Deletes gametracker with given id.
      *
-     * @param integer $id
+     * @param int $id
      */
     public function delete($id)
     {

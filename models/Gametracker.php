@@ -39,14 +39,14 @@ class Gametracker extends \Ilch\Model
     /**
      * The link target of the entry.
      *
-     * @var integer
+     * @var int
      */
     protected $target;
 
     /**
      * The free of the entry.
      *
-     * @var integer
+     * @var int
      */
     protected $free;
 
@@ -145,7 +145,7 @@ class Gametracker extends \Ilch\Model
     /**
      * Gets the link target of the entry.
      *
-     * @return integer
+     * @return int
      */
     public function getTarget()
     {
@@ -155,7 +155,7 @@ class Gametracker extends \Ilch\Model
     /**
      * Set the link target of the entry.
      *
-     * @param integer $target
+     * @param int $target
      * @return $this
      */
     public function setTarget($target)
@@ -168,7 +168,7 @@ class Gametracker extends \Ilch\Model
     /**
      * Gets the free of the entry.
      *
-     * @return integer
+     * @return int
      */
     public function getFree()
     {
@@ -178,7 +178,7 @@ class Gametracker extends \Ilch\Model
     /**
      * Set the free of the entry.
      *
-     * @param integer $free
+     * @param int $free
      * @return $this
      */
     public function setFree($free)
